@@ -1,19 +1,20 @@
 <template>
   <div>
     这里是食品业
-    <video
-      id="my-video"
-      class="video-js vjs-default-skin"
-      controls=""
-      preload="none"
-      x5-palysinline=""
-      playsinline=""
-      webkit-playsinline=""
-      poster=""
-      x-webkit-airplay="allow"
-    >
-      <source :src="video_link" type="application/x-mpegURL">
-    </video>
+<!--    <video-->
+<!--      id="my-video"-->
+<!--      class="video-js vjs-default-skin"-->
+<!--      controls=""-->
+<!--      preload="none"-->
+<!--      x5-palysinline=""-->
+<!--      playsinline=""-->
+<!--      webkit-playsinline=""-->
+<!--      poster=""-->
+<!--      x-webkit-airplay="allow"-->
+<!--    >-->
+<!--      <source :src="video_link" type="application/x-mpegURL">-->
+<!--    </video>-->
+    <video></video>
   </div>
 </template>
 
@@ -69,8 +70,8 @@
   .vjs-big-play-button {
     left: 50% !important;
     top: 50% !important;
-    margin-top: -1em;
-    margin-left: -1.5em;
+    /*margin-top: -1em;*/
+    /*margin-left: -1.5em;*/
 
   }
 </style>

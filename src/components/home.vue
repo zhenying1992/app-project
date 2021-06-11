@@ -5,6 +5,7 @@
       v-model="search_value"
       placeholder="搜索一下，马上发车"
       @search="onSearch"
+      style="background-color: black"
     >
     </van-search>
 
@@ -13,7 +14,7 @@
         <router-link :to="{name: 'video', params: {id: video.id}}">
           <img style="width:80%;height: 120px" v-lazy="video.pic_link"/>
           <span class="img-word">
-          <span class="img-word-width">{{getSafeName(video.name)}}</span>
+          <span class="img-word-width">{{getSafeName(video.name, name_length)}}</span>
         </span>
         </router-link>
       </van-swipe-item>
@@ -26,7 +27,7 @@
           <div style="margin-top: 10px;">
             <img style="width:80%;height: 120px" v-lazy="video.pic_link"/>
           </div>
-          <div class="item-title"> {{getSafeName(video.name)}}</div>
+          <div class="item-title"> {{getSafeName(video.name, name_length)}}</div>
         </router-link>
       </van-col>
     </van-row>
@@ -38,7 +39,7 @@
           <div style="margin-top: 10px;">
             <img style="width:80%;height: 120px" v-lazy="video.pic_link"/>
           </div>
-          <div class="item-title"> {{getSafeName(video.name)}}</div>
+          <div class="item-title"> {{getSafeName(video.name, name_length)}}</div>
         </router-link>
       </van-col>
     </van-row>
@@ -65,9 +66,9 @@
             onSearch(val) {
                 console.log(val)
             },
-            getSafeName(str) {
+            getSafeName(str, len) {
                 let reg = /[\u4e00-\u9fa5]/g; // 专业匹配中文
-                let slice = str.substring(0, this.name_length);
+                let slice = str.substring(0, len);
                 let chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length));
                 let realen = slice.length * 2 - chineseCharNum;
                 return str.substr(0, realen) + (realen < str.length ? '...' : '');

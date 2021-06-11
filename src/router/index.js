@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import main from '@/components/main'
 import home from '@/components/home'
-import page2 from '@/components/page2'
+import resource from '@/components/resource'
 import page3 from '@/components/page3'
 import my from '@/components/my'
 import video from '@/components/video'
@@ -27,9 +27,9 @@ export default new Router({
           component: home
         },
         {
-          path: 'page2',
-          name: 'page2',
-          component: page2
+          path: 'resource',
+          name: 'resource',
+          component: resource
         },
         {
           path: 'page3',
