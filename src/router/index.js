@@ -6,6 +6,7 @@ import home from '@/components/home'
 import page2 from '@/components/page2'
 import page3 from '@/components/page3'
 import my from '@/components/my'
+import video from '@/components/video'
 
 Vue.use(Router);
 
@@ -15,26 +16,37 @@ export default new Router({
       path: '/',
       name: 'main',
       component: main,
-      children: [{
-        path: '',
-        component: home
-      }, {
-        path: 'home',
-        name: 'home',
-        component: home
-      }, {
-        path: 'page2',
-        name: 'page2',
-        component: page2
-      }, {
-        path: 'page3',
-        name: 'page3',
-        component: page3
-      }, {
-        path: 'my',
-        name: 'my',
-        component: my
-      }]
+      children: [
+        {
+          path: '',
+          component: home
+        },
+        {
+          path: 'home',
+          name: 'home',
+          component: home
+        },
+        {
+          path: 'page2',
+          name: 'page2',
+          component: page2
+        },
+        {
+          path: 'page3',
+          name: 'page3',
+          component: page3
+        },
+        {
+          path: 'my',
+          name: 'my',
+          component: my
+        },
+        {
+          path: 'video',
+          name: 'video',
+          component: video
+        }
+      ]
     }
   ]
 })

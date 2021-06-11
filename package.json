@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "vant": "^2.12.21",
+    "video.js": "^7.12.3",
+    "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

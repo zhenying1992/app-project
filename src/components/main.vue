@@ -1,6 +1,7 @@
 <template>
   <div>
     <router-view></router-view>
+    <div style="height: 3rem;"></div>
     <van-tabbar v-model="active" >
       <van-tabbar-item name="home" icon="home-o" :to="{name: 'home'}">首页</van-tabbar-item>
       <van-tabbar-item name="resource" icon="search" :to="{name: 'page2'}"> 资源</van-tabbar-item>
