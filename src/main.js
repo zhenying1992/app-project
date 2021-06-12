@@ -34,7 +34,7 @@ function getCookie(cookieName) {
   return unescape(totalCookie.substring(valueStartAt, valueEndAt));
 }
 
-const api = 'api/v1';
+const api = 'http://192.168.1.102:8000/api/v1';
 axios.defaults.baseURL = api;
 axios.defaults.withCredentials = true;
 axios.interceptors.request.use(
