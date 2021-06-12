@@ -13,7 +13,7 @@
         <van-col span="12" v-for="video in video_list" :key="video.id">
           <router-link :to="{name: 'video', params: {id: video.id}}">
             <div style="margin-top: 10px;">
-              <img style="width:80%;height: 120px" v-lazy="video.pic_link"/>
+              <img style="width:95%;height: 120px; border-radius: 10px" v-lazy="video.pic_link"/>
             </div>
             <div class="item-title"> {{getSafeName(video.name, 8)}}</div>
           </router-link>
@@ -78,7 +78,7 @@ export default {
 
 <style scoped>
 .item-title {
-  font-size: 5px;
+  font-size: 15px;
   color: white;
   text-align: center;
 }
