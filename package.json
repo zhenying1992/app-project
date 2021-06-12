@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "vant": "^2.12.21",
     "video.js": "^7.12.3",
     "videojs-contrib-hls": "^5.15.0",
