@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import VueCoreVideoPlayer from 'vue-core-video-player'
 import {Button, Tabbar, TabbarItem, Search, Swipe, SwipeItem, Lazyload, Col, Row, List, Cell} from 'vant'
 
 Vue.config.productionTip = false;
@@ -11,6 +12,10 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 Vue.use(Button).use(Tabbar).use(TabbarItem).use(Search).use(Swipe).use(SwipeItem);
 Vue.use(Lazyload).use(Col).use(Row).use(List).use(Cell);
+
+Vue.use(VueCoreVideoPlayer, {
+  lang: 'zh-CN'
+})
 
 function getCookie(cookieName) {
   // 获取所有的cookie "psw=1234we; rememberme=true; user=Annie"

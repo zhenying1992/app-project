@@ -11,7 +11,7 @@
 
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="video in random_video_list" :key="video.id">
-        <router-link :to="{name: 'video', params: {id: video.id}}">
+        <router-link :to="{name: 'video', params: {id: video.id, link: video.video_link}}">
           <img style="width:90%;height: 120px" v-lazy="video.pic_link"/>
           <span class="img-word">
           <span class="img-word-width">{{ getSafeName(video.name, name_length) }}</span>
@@ -23,7 +23,7 @@
     <div class="sub-title">最新视频</div>
     <van-row>
       <van-col span="12" v-for="video in late_video_list" :key="video.id">
-        <router-link :to="{name: 'video', params: {id: video.id}}">
+        <router-link :to="{name: 'video', params: {id: video.id, link: video.video_link}}">
           <div style="margin-top: 10px;">
             <img style="width:95%;height: 120px; border-radius: 10px" v-lazy="video.pic_link"/>
           </div>
@@ -35,7 +35,7 @@
     <div class="sub-title">优质精品</div>
     <van-row>
       <van-col span="12" v-for="video in high_score_video_list" :key="video.id">
-        <router-link :to="{name: 'video', params: {id: video.id}}">
+        <router-link :to="{name: 'video', params: {id: video.id, link: video.video_link}}">
           <div style="margin-top: 10px;">
             <img style="width:95%;height: 120px; border-radius: 10px" v-lazy="video.pic_link"/>
           </div>
