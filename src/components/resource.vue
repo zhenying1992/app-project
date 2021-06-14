@@ -1,21 +1,36 @@
 <template>
-  <div>
+  <div style="background-color: black">
+    <van-search
+      shape="round"
+      v-model="keyword"
+      placeholder="搜索一下，马上发车"
+      @search="onSearch"
+      style="background-color: black"
+    >
+    </van-search>
+
+    <div style="margin-top: 15px">
+      <van-tag
+        :plain="!tag.choose"
+        round
+        :color="tag.color"
+        v-for="(tag, idx) in tag_list"
+        :key="tag.id"
+        @click="chooseTag(idx)"
+        style="margin:5px"
+      >
+        {{ tag.name }}
+      </van-tag>
+    </div>
+
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-<!--      <van-cell v-for="video in video_list" :key="video.id" :title="video.name" style="width:45%;height: 150px; margin:5px; display: inline-block">-->
-<!--        <router-link :to="{name: 'video', params: {id: video.id}}">-->
-<!--          <div>-->
-<!--            <img style="height: 120px" v-lazy="video.pic_link"/>-->
-<!--            <div class="item-title"> {{ getSafeName(video.name, 8) }}</div>-->
-<!--          </div>-->
-<!--        </router-link>-->
-<!--      </van-cell>-->
       <van-row>
         <van-col span="12" v-for="video in video_list" :key="video.id">
-          <router-link :to="{name: 'video', params: {id: video.id}}">
+          <router-link :to="{name: 'video', params: {id: video.id,  link: video.video_link}}">
             <div style="margin-top: 10px;">
               <img style="width:95%;height: 120px; border-radius: 10px" v-lazy="video.pic_link"/>
             </div>
-            <div class="item-title"> {{getSafeName(video.name, 8)}}</div>
+            <div class="item-title"> {{ getSafeName(video.name, 8) }}</div>
           </router-link>
         </van-col>
       </van-row>
@@ -27,32 +42,50 @@
 export default {
   data() {
     return {
+      keyword: '',
+      tags: [],
       loading: false,
       finished: false,
       video_list: [],
       count: 0,
       current_page: 0,
-      tag_list: []
+      tag_list: [],
+      color_list: ['#a18d51', '#ac4d4d', '#71a54c']
     }
   },
   mounted() {
-    // this.listVideo(1);
+    this.listVideoTag();
   },
   methods: {
+    clear() {
+      this.tags = [];
+      this.count = 0;
+      this.video_list = [];
+    },
     listVideoTag() {
-      this.tag_list = [];
+      this.$axios({
+        url: 'video/tags',
+        method: 'get'
+      }).then(resp => {
+        this.tag_list = resp.data;
+        for (let i = 0; i < this.tag_list.length; i++) {
+          this.tag_list[i].choose = false;
+          this.tag_list[i].color = this.color_list[i % this.color_list.length]
+        }
+      })
     },
     listVideo(page) {
       this.$axios({
         url: 'video',
         method: 'get',
-        params: {'page': page}
+        params: {
+          'page': page,
+          'keyword': this.keyword,
+          'tags': JSON.stringify(this.tags)
+        }
       }).then(resp => {
         this.count = resp.data.count;
         this.video_list.push(...resp.data.results);
-        // for (let i=0; i<this.video_list.length; i++){
-        //   this.video_list[i].pic_link='https://img01.yzcdn.cn/vant/apple-1.jpg'
-        // }
       });
     },
     getSafeName(str, len) {
@@ -71,6 +104,23 @@ export default {
       this.current_page += 1
       this.listVideo(this.current_page);
       this.loading = false;
+    },
+    onSearch(val) {
+      this.clear();
+      this.listVideo(1)
+    },
+    chooseTag(idx) {
+      let newTag = JSON.parse(JSON.stringify(this.tag_list[idx]))
+      newTag.choose = !newTag.choose;
+      this.$set(this.tag_list, idx, newTag);
+
+      this.clear();
+      for (let i = 0; i < this.tag_list.length; i++) {
+        if (this.tag_list[i].choose === true) {
+          this.tags.push(this.tag_list[i].name)
+        }
+      }
+      this.listVideo(1)
     }
   }
 }
@@ -81,6 +131,14 @@ export default {
   font-size: 15px;
   color: white;
   text-align: center;
+}
+
+div {
+  background-color: black;
+}
+
+input {
+  background-color: #0a74de;
 }
 
 </style>

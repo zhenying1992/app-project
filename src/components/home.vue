@@ -1,18 +1,10 @@
 <template>
   <div style="background-color: black">
-    <van-search
-      shape="round"
-      v-model="search_value"
-      placeholder="搜索一下，马上发车"
-      @search="onSearch"
-      style="background-color: black"
-    >
-    </van-search>
 
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="padding-top: 10px;">
       <van-swipe-item v-for="video in random_video_list" :key="video.id">
         <router-link :to="{name: 'video', params: {id: video.id, link: video.video_link}}">
-          <img style="width:90%;height: 120px" v-lazy="video.pic_link"/>
+          <img style="width:90%;height: 200px;border-radius: 10px" v-lazy="video.pic_link"/>
           <span class="img-word">
           <span class="img-word-width">{{ getSafeName(video.name, name_length) }}</span>
         </span>
@@ -50,7 +42,6 @@
 export default {
   data() {
     return {
-      search_value: '',
       late_video_list: [],
       high_score_video_list: [],
       random_video_list: [],
@@ -63,9 +54,6 @@ export default {
     this.listLateVideo();
   },
   methods: {
-    onSearch(val) {
-      console.log(val)
-    },
     getSafeName(str, len) {
       let reg = /[\u4e00-\u9fa5]/g; // 专业匹配中文
       let slice = str.substring(0, len);
